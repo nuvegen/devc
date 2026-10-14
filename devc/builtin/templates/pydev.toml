@@ -1,0 +1,39 @@
+# Mitgeliefertes Template: Python-Tools mit Claude Code und HTTP-Server
+id = "pydev"
+title = "Python-Tools"
+version = "1.0.0"
+description = "Python-Tools und Skripte mit Claude Code"
+platforms = ["lxd", "apple"]
+addons = ["claude-code", "python", "httpserver", "webproxy", "git"]
+
+[resources]
+cpu = 4
+memory = "8GiB"
+disk = "30GiB"
+
+[data]
+code = "volume"              # oder: shared = "/srv/dev/${name}"
+
+[params.python]
+version = "3.12"
+
+[params.httpserver]
+port = 8000
+dir = "/work/out"
+
+[params.webproxy]
+proxy = "8080"            # Link auf einen eigenen Dienst; ohne Dienst meldet der Proxy »antwortet kein Dienst«
+
+[secrets]                    # nur Namen im geteilten Store, nie Werte
+"claude-code.api_key" = "anthropic"
+
+[docs]
+readme = """
+Python-Container mit Claude Code. Nach dem Anlegen auf der Addon-Seite
+»venv anlegen« ausführen. Ein eigener Dienst auf Port 8080 ist über den
+Link »Port 8080« erreichbar; er muss auf 0.0.0.0 lauschen.
+"""
+ai = """
+## Projekt
+Python-Quellen unter /work/src, Tests unter /work/tests.
+"""

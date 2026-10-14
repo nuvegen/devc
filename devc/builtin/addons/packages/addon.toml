@@ -1,0 +1,21 @@
+id = "packages"
+title = "Pakete"
+version = "1.0.0"
+description = "Zusätzliche Pakete von Ubuntu (apt) für diesen Container"
+platforms = ["lxd", "apple"]
+requires = ["base"]
+install = ["install.sh"]
+
+[[params]]
+name = "apt"
+type = "string"
+default = ""
+max_length = 4000
+pattern = " *([a-z0-9][a-z0-9+.-]+( +[a-z0-9][a-z0-9+.-]+)*)? *"
+description = "Paketnamen, durch Leerzeichen getrennt, zum Beispiel: jq sqlite3"
+
+[[params]]
+name = "recommends"
+type = "bool"
+default = false
+description = "Auch die von Ubuntu empfohlenen Zusatzpakete installieren"

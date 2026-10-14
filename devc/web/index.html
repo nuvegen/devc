@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>devc</title>
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="vendor/xterm.css">
+</head>
+<body>
+<div id="banner"></div>
+<header class="top" id="top" hidden>
+<a class="brand mono" href="#/">devc</a>
+<nav class="nav" aria-label="Hauptnavigation" id="nav"></nav>
+<span class="chip" id="platform"></span>
+<button class="btn btn-quiet" type="button" id="logout">Abmelden</button>
+</header>
+<main id="main" tabindex="-1"></main>
+<dialog id="dialog" aria-labelledby="dialog-title">
+<form method="dialog">
+<h2 id="dialog-title"></h2>
+<p id="dialog-text"></p>
+<div class="row end">
+<button class="btn" value="cancel" type="submit">Abbrechen</button>
+<button class="btn btn-danger" value="ok" type="submit" id="dialog-ok">Bestätigen</button>
+</div>
+</form>
+</dialog>
+<noscript><p class="pad">devc braucht JavaScript. Ohne Browser geht alles auch über die Kommandozeile: <code>devc --help</code>.</p></noscript>
+<script src="vendor/xterm.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

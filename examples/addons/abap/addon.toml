@@ -1,0 +1,50 @@
+id = "abap"
+title = "ABAP-Werkzeuge"
+version = "1.0.0"
+description = "sapcli, abaplint, abaplint-Transpiler und FAQ-Dokumente für die KI"
+platforms = ["lxd", "apple"]
+requires = ["base", "node"]
+install = ["install.sh"]
+
+[[params]]
+name = "sap_host"
+type = "string"
+required = true
+description = "Application-Server-Host (SAP_ASHOST)"
+
+[[params]]
+name = "sap_port"
+type = "int"
+default = 443
+min = 1
+max = 65535
+description = "HTTP(S)-Port des ICF (SAP_PORT)"
+
+[[params]]
+name = "sap_ssl"
+type = "bool"
+default = true
+description = "HTTPS verwenden (SAP_SSL)"
+
+[[params]]
+name = "sap_client"
+type = "string"
+required = true
+max_length = 3
+description = "Mandant (SAP_CLIENT)"
+
+[[params]]
+name = "sap_user"
+type = "string"
+required = true
+description = "Benutzer (SAP_USER)"
+
+[[params]]
+name = "sap_password"
+type = "secret"
+required = false
+description = "Passwort (SAP_PASSWORD). Ohne Wert fragt sapcli nach."
+
+[[archives]]
+src = "files/faq.tar.gz"
+dest = "/FAQ"

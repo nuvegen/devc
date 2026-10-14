@@ -1,0 +1,28 @@
+id = "webproxy"
+title = "Web-Proxy"
+version = "1.0.0"
+description = "Links auf Dienste im Container, erreichbar über den Proxy von devc"
+platforms = ["lxd", "apple"]
+requires = ["base"]
+uninstall = ["uninstall.sh"]
+
+[[params]]
+name = "proxy"
+type = "ports"
+default = ""
+description = "Ports mit optionaler Beschriftung, durch Leerzeichen getrennt, z. B. 3000=Vite 8080; erreichbar nach Anmeldung bei devc"
+
+[[params]]
+name = "public"
+type = "ports"
+default = ""
+description = "Wie proxy, aber ohne Anmeldung erreichbar (für API-Clients); jeder, der den Proxy erreicht, kommt an diese Ports"
+
+[[links]]
+label = "Port"
+ports = "{proxy}"
+
+[[links]]
+label = "Port"
+ports = "{public}"
+public = true

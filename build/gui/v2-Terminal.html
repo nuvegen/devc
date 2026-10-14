@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>devc – py-tools: Terminal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#F4F5F2}
+a{color:#1F5F7A}a:hover{color:#123E51}
+.mono{font-family:'IBM Plex Mono',monospace}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;min-width:44px;padding:0 16px;box-sizing:border-box;border-radius:6px;border:1px solid #BFC8C1;background:#FFFFFF;color:#1B221E;font:500 14px 'IBM Plex Sans',sans-serif;text-decoration:none;cursor:pointer}
+.btn:hover{background:#EEF1ED;color:#1B221E}
+.hint{font-size:12px;color:#56625B;line-height:1.4}
+.top{background:#FFFFFF;border-bottom:1px solid #DDE2DC;padding:0 24px;display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.nav a{color:#3F4A44;text-decoration:none;padding:14px 4px;border-bottom:2px solid transparent;font-weight:500;display:inline-block}
+.nav a.active{color:#1B221E;border-bottom-color:#1F5F7A}
+.crumb{font-size:13px;margin:0}
+.field label{font-size:13px;font-weight:600;color:#2E3A33}
+.inp{min-height:44px;box-sizing:border-box;padding:0 12px;border:1px solid #BFC8C1;border-radius:6px;font:14px 'IBM Plex Sans',sans-serif;background:#FFFFFF;color:#1B221E}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; font-family: 'IBM Plex Sans', sans-serif; color: #1B221E; background: #F4F5F2">
+<header class="top">
+<span class="mono" style="font-size: 20px; font-weight: 500; padding: 14px 0">devc</span>
+<nav class="nav" aria-label="Hauptnavigation" style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px">
+<a class="active" href="v2-Dashboard.html">Dashboard</a>
+<a href="v2-Templates.html">Templates</a>
+<a href="v2-Addons.html">Addons</a>
+<a href="v2-Secrets.html">Secret-Store</a>
+</nav>
+</header>
+<main style="max-width: 1200px; margin: 0 auto; padding: 24px 24px 48px; display: flex; flex-direction: column; gap: 16px">
+<p class="crumb"><a href="v2-Dashboard.html">Dashboard</a> <span style="color: #6B766F">/</span> <a href="v2-Container.html">py-tools</a> <span style="color: #6B766F">/</span> Terminal</p>
+<div style="display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap">
+<div>
+<h1 style="margin: 0; font-size: 28px; font-weight: 600">Terminal</h1>
+<p style="margin: 4px 0 0; color: #4F5B54; font-size: 14px">verbunden als <span class="mono">dev@py-tools</span> in <span class="mono">/work</span></p>
+</div>
+<div style="margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-end">
+<div class="field" style="display: flex; flex-direction: column; gap: 4px">
+<label for="t-user">Benutzer</label>
+<select id="t-user" class="inp"><option selected>dev</option><option>root</option></select>
+</div>
+<button class="btn" type="button">Vollbild</button>
+<button class="btn" type="button">Trennen</button>
+</div>
+</div>
+<div style="background: #111614; color: #D7E3DA; border-radius: 8px; padding: 18px; min-height: 560px; box-sizing: border-box; overflow-x: auto" role="region" aria-label="Terminal-Ausgabe">
+<pre style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13.5px; line-height: 1.6; white-space: pre">dev@py-tools:/work$ ls
+AGENTS.md  CLAUDE.md  pyproject.toml  src  tests
+dev@py-tools:/work$ <span style="background: #D7E3DA; color: #111614"> </span></pre>
+</div>
+<p class="hint" style="margin: 0">WebSocket mit PTY. Beginn und Ende der Sitzung werden im Log festgehalten, Inhalte nicht. Ohne Browser: <span class="mono">devc shell py-tools</span></p>
+</main>
+</div>
+</body>
+</html>

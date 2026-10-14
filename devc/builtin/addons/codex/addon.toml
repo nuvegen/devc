@@ -1,0 +1,45 @@
+id = "codex"
+title = "Codex"
+version = "1.0.0"
+description = "Codex CLI mit Chat-Kachel, für OpenAI und kompatible Dienste wie Novita"
+platforms = ["lxd", "apple"]
+requires = ["base"]
+install = ["install.sh"]
+uninstall = ["uninstall.sh"]
+
+[[params]]
+name = "base_url"
+type = "string"
+default = "https://api.novita.ai/openai/v1"
+max_length = 300
+pattern = "(https?://[A-Za-z0-9._:/%+~-]+)?"
+description = "Adresse des Dienstes (OpenAI-kompatibel, Responses API). Leer: OpenAI selbst."
+
+[[params]]
+name = "model"
+type = "string"
+required = true
+max_length = 200
+pattern = "[A-Za-z0-9][A-Za-z0-9._:/@+-]*"
+description = "Modell, genau wie der Dienst es nennt, z. B. deepseek/deepseek-v3.1"
+
+[[params]]
+name = "api_key"
+type = "secret"
+required = false
+description = "API-Key des Dienstes"
+
+[[params]]
+name = "release"
+type = "string"
+default = "latest"
+max_length = 20
+pattern = "latest|[0-9]+\\.[0-9]+\\.[0-9]+"
+description = "Version von Codex CLI, z. B. 0.162.1. latest: die neueste beim ersten Einrichten."
+
+[[tiles]]
+id = "chat"
+title = "Codex"
+kind = "chat"
+description = "Mit Codex im Container schreiben"
+run = "python3 /opt/devc/addons/codex/bridge.py --model {model}"

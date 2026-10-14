@@ -1,0 +1,14 @@
+id = "node"
+title = "Node.js"
+version = "1.0.0"
+description = "Node.js LTS mit npm aus dem NodeSource-Repository"
+platforms = ["lxd", "apple"]
+requires = ["base"]
+install = ["install.sh"]
+
+[[params]]
+name = "version"
+type = "choice"
+options = ["20", "22", "24"]
+default = "22"
+description = "Hauptversion von Node.js"

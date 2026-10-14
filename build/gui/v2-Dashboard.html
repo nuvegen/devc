@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>devc – Dashboard</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#F4F5F2}
+a{color:#1F5F7A}a:hover{color:#123E51}
+.mono{font-family:'IBM Plex Mono',monospace}
+.chip{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:18px;padding:2px 8px;border:1px solid #C9D0CA;border-radius:4px;background:#FFFFFF;color:#2E3A33}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;min-width:44px;padding:0 16px;box-sizing:border-box;border-radius:6px;border:1px solid #BFC8C1;background:#FFFFFF;color:#1B221E;font:500 14px 'IBM Plex Sans',sans-serif;text-decoration:none;cursor:pointer}
+.btn:hover{background:#EEF1ED;color:#1B221E}
+.btn-primary{background:#1F5F7A;border-color:#1F5F7A;color:#FFFFFF}
+.btn-primary:hover{background:#174C62;color:#FFFFFF}
+.card{background:#FFFFFF;border:1px solid #DDE2DC;border-radius:8px;padding:20px}
+.tile{display:flex;flex-direction:column;gap:6px;padding:18px;background:#FFFFFF;border:1px solid #DDE2DC;border-radius:8px;text-decoration:none;color:#1B221E;min-height:112px;box-sizing:border-box}
+.tile:hover{border-color:#1F5F7A;color:#1B221E}
+.hint{font-size:12px;color:#56625B;line-height:1.4}
+.top{background:#FFFFFF;border-bottom:1px solid #DDE2DC;padding:0 24px;display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.nav a{color:#3F4A44;text-decoration:none;padding:14px 4px;border-bottom:2px solid transparent;font-weight:500;display:inline-block}
+.nav a.active{color:#1B221E;border-bottom-color:#1F5F7A}
+.msg{display:flex;gap:10px;align-items:center;padding:12px 16px;border-radius:6px;background:#E8F3EC;border:1px solid #A9CDB6;color:#1A4D30;font-size:14px}
+h2.sec{margin:0;font-size:16px;font-weight:600}
+table{border-collapse:collapse;width:100%}
+th{text-align:left;font-size:12px;font-weight:600;color:#4F5B54;text-transform:uppercase;letter-spacing:.05em;padding:10px 12px;border-bottom:1px solid #D7DCD6;white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid #E6E9E4;font-size:14px;vertical-align:middle}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; font-family: 'IBM Plex Sans', sans-serif; color: #1B221E; background: #F4F5F2">
+
+<div role="alert" style="background: #FBE9E7; border-bottom: 2px solid #B42318; color: #7A1A10; padding: 10px 24px; font-size: 14px"><strong>Unsicherer Bind:</strong> <span class="mono">0.0.0.0:8740</span> ohne TLS. Nur für die Entwicklung im vertrauenswürdigen Netz.</div>
+
+<header class="top">
+<span class="mono" style="font-size: 20px; font-weight: 500; padding: 14px 0">devc</span>
+<nav class="nav" aria-label="Hauptnavigation" style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px">
+<a class="active" href="v2-Dashboard.html" aria-current="page">Dashboard</a>
+<a href="v2-Templates.html">Templates</a>
+<a href="v2-Addons.html">Addons</a>
+<a href="v2-Secrets.html">Secret-Store</a>
+</nav>
+<span class="chip" style="margin-left: auto">lxd · Projekt devcontainers</span>
+</header>
+<main style="max-width: 1200px; margin: 0 auto; padding: 28px 24px 48px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap">
+<div>
+<h1 style="margin: 0; font-size: 28px; font-weight: 600">Dashboard</h1>
+<p style="margin: 4px 0 0; color: #4F5B54; font-size: 14px">3 Container · 2 laufen</p>
+</div>
+<a class="btn btn-primary" href="v2-Neu-Template.html" style="margin-left: auto">Neuer Container</a>
+</div>
+
+<div class="msg" role="status">web-proto wurde gestartet.</div>
+
+
+<section class="card" aria-labelledby="ct-h" style="padding: 0">
+<div style="padding: 16px 20px 8px"><h2 id="ct-h" class="sec">Container</h2></div>
+<div style="overflow-x: auto">
+<table>
+<thead><tr><th scope="col">Name</th><th scope="col">Status</th><th scope="col">Template</th><th scope="col">Addons</th><th scope="col">Letztes Backup</th><th scope="col">Schnellaktion</th></tr></thead>
+<tbody>
+<tr>
+<td><a href="v2-Container.html" class="mono" style="font-weight: 500">py-tools</a></td>
+<td><span style="display: inline-flex; align-items: center; gap: 6px; color: #1F6B42; font-weight: 500"><span style="width: 8px; height: 8px; border-radius: 50%; background: #2E8B57"></span>läuft</span></td>
+<td class="mono" style="font-size: 13px">pydev</td>
+<td><span class="chip">python</span> <span class="chip">claude-code</span> <span class="chip">httpserver</span></td>
+<td style="color: #4F5B54">gestern 03:00</td>
+<td><button class="btn" type="button">Stoppen</button></td>
+</tr>
+<tr>
+<td><a href="v2-Container.html" class="mono" style="font-weight: 500">abap-rap</a></td>
+<td><span style="display: inline-flex; align-items: center; gap: 6px; color: #1F6B42; font-weight: 500"><span style="width: 8px; height: 8px; border-radius: 50%; background: #2E8B57"></span>läuft</span></td>
+<td class="mono" style="font-size: 13px">abapdev</td>
+<td><span class="chip">abap</span> <span class="chip">claude-code</span> <span class="chip">opencode</span></td>
+<td style="color: #4F5B54">heute 08:02</td>
+<td><button class="btn" type="button">Stoppen</button></td>
+</tr>
+<tr>
+<td><a href="v2-Container.html" class="mono" style="font-weight: 500">web-proto</a></td>
+<td><span style="display: inline-flex; align-items: center; gap: 6px; color: #4F5B54; font-weight: 500"><span style="width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid #6B766F; box-sizing: border-box"></span>gestoppt</span></td>
+<td class="mono" style="font-size: 13px">webdev</td>
+<td><span class="chip">node</span> <span class="chip">claude-code</span></td>
+<td style="color: #4F5B54">keins</td>
+<td><button class="btn" type="button">Starten</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="hint" style="margin: 0; padding: 12px 20px">Der Name führt zum Container-Dashboard. Starten und Stoppen sind die einzigen Schnellaktionen hier.</p>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+<section style="flex: 2 1 520px; min-width: 0" aria-labelledby="fn-h">
+<h2 id="fn-h" class="sec" style="margin-bottom: 12px">Funktionen</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px">
+<a class="tile" href="v2-Templates.html">
+<span style="font-weight: 600; font-size: 16px">Templates</span>
+<span style="font-size: 14px">3 Templates · 1 eigenes</span>
+<span class="hint">anlegen, bearbeiten, aus Container speichern</span>
+</a>
+<a class="tile" href="v2-Addons.html">
+<span style="font-weight: 600; font-size: 16px">Addons</span>
+<span style="font-size: 14px">7 Addons · 1 eigenes</span>
+<span class="hint">hochladen, herunterladen, löschen</span>
+</a>
+<a class="tile" href="v2-Secrets.html">
+<span style="font-weight: 600; font-size: 16px">Secret-Store</span>
+<span style="font-size: 14px">2 Einträge</span>
+<span class="hint" style="color: #8A4B08">abapdev braucht noch: git-deploy</span>
+</a>
+</div>
+</section>
+<section style="flex: 1 1 300px; min-width: 0" aria-labelledby="jb-h">
+<h2 id="jb-h" class="sec" style="margin-bottom: 12px">Laufende Jobs</h2>
+<div class="card" style="padding: 18px; min-height: 112px; box-sizing: border-box">
+<div style="font-size: 14px; display: flex; justify-content: space-between; gap: 8px"><span class="mono">backup abap-rap</span><span style="color: #1F5F7A; font-weight: 500">läuft</span></div>
+<div style="height: 6px; background: #E3E8E4; border-radius: 3px; margin: 8px 0" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="Fortschritt backup abap-rap"><div style="width: 40%; height: 6px; background: #1F5F7A; border-radius: 3px"></div></div>
+<a href="v2-Log.html" style="font-size: 13px">Log ansehen</a>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body>
+</html>

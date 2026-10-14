@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>devc – py-tools: Wiederherstellen</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#F4F5F2}
+a{color:#1F5F7A}a:hover{color:#123E51}
+.mono{font-family:'IBM Plex Mono',monospace}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;min-width:44px;padding:0 16px;box-sizing:border-box;border-radius:6px;border:1px solid #BFC8C1;background:#FFFFFF;color:#1B221E;font:500 14px 'IBM Plex Sans',sans-serif;text-decoration:none;cursor:pointer}
+.btn:hover{background:#EEF1ED;color:#1B221E}
+.btn-primary{background:#1F5F7A;border-color:#1F5F7A;color:#FFFFFF}
+.btn-primary:hover{background:#174C62;color:#FFFFFF}
+.card{background:#FFFFFF;border:1px solid #DDE2DC;border-radius:8px;padding:20px}
+.hint{font-size:12px;color:#56625B;line-height:1.4}
+.top{background:#FFFFFF;border-bottom:1px solid #DDE2DC;padding:0 24px;display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.nav a{color:#3F4A44;text-decoration:none;padding:14px 4px;border-bottom:2px solid transparent;font-weight:500;display:inline-block}
+.nav a.active{color:#1B221E;border-bottom-color:#1F5F7A}
+.crumb{font-size:13px;margin:0}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label,.lbl{font-size:13px;font-weight:600;color:#2E3A33}
+.inp{min-height:44px;box-sizing:border-box;padding:0 12px;border:1px solid #BFC8C1;border-radius:6px;font:14px 'IBM Plex Sans',sans-serif;background:#FFFFFF;color:#1B221E;width:100%}
+.opt{display:flex;gap:10px;align-items:flex-start;min-height:44px;font-size:14px;padding:6px 0}
+.opt input{width:18px;height:18px;margin-top:2px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px;padding:5px 0}
+.editor{width:100%;box-sizing:border-box;min-height:400px;padding:16px;border:1px solid #2F3934;border-radius:6px;background:#1D2420;color:#E6ECE7;font:13px/1.6 'IBM Plex Mono',monospace;resize:vertical}
+h2.sec{margin:0 0 12px;font-size:16px;font-weight:600}
+table{border-collapse:collapse;width:100%}
+th{text-align:left;font-size:12px;font-weight:600;color:#4F5B54;text-transform:uppercase;letter-spacing:.05em;padding:8px;border-bottom:1px solid #D7DCD6}
+td{padding:8px;border-bottom:1px solid #E6E9E4;font-size:14px;vertical-align:middle}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; font-family: 'IBM Plex Sans', sans-serif; color: #1B221E; background: #F4F5F2">
+<header class="top">
+<span class="mono" style="font-size: 20px; font-weight: 500; padding: 14px 0">devc</span>
+<nav class="nav" aria-label="Hauptnavigation" style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px">
+<a class="active" href="v2-Dashboard.html">Dashboard</a>
+<a href="v2-Templates.html">Templates</a>
+<a href="v2-Addons.html">Addons</a>
+<a href="v2-Secrets.html">Secret-Store</a>
+</nav>
+</header>
+<main style="max-width: 1200px; margin: 0 auto; padding: 24px 24px 48px; display: flex; flex-direction: column; gap: 16px">
+<p class="crumb"><a href="v2-Dashboard.html">Dashboard</a> <span style="color: #6B766F">/</span> <a href="v2-Container.html">py-tools</a> <span style="color: #6B766F">/</span> <a href="v2-Backups.html">Backups</a> <span style="color: #6B766F">/</span> Wiederherstellen</p>
+<div style="display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap">
+<h1 style="margin: 0; font-size: 28px; font-weight: 600">Wiederherstellen</h1>
+<div style="margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap">
+<a class="btn" href="v2-Backups.html">Abbrechen</a>
+<button class="btn btn-primary" type="button">Wiederherstellen</button>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+<div style="flex: 2 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<section class="card" aria-labelledby="q-h">
+<h2 id="q-h" class="sec">1 · Quelle</h2>
+<label class="opt"><input type="radio" name="src" checked> <span>Vorhandenes Backup</span></label>
+<div class="field" style="padding-left: 28px">
+<label for="r-file">Archiv</label>
+<select id="r-file" class="inp mono"><option selected>py-tools-20261009-0300.devc.tar.gz</option><option>py-tools-20261005-1830.devc.tar.gz</option></select>
+</div>
+<label class="opt" style="margin-top: 8px"><input type="radio" name="src"> <span>Archiv hochladen</span></label>
+<div class="field" style="padding-left: 28px">
+<label for="r-up">Datei</label>
+<input id="r-up" type="file" accept=".gz" class="inp" style="padding-top: 10px">
+</div>
+</section>
+
+<section class="card" aria-labelledby="z-h">
+<h2 id="z-h" class="sec">2 · Ziel</h2>
+<label class="opt"><input type="radio" name="dst" checked> <span>In <span class="mono">py-tools</span> zurückspielen <span class="hint">überschreibt /work und Memory; der Container wird dafür gestoppt</span></span></label>
+<label class="opt"><input type="radio" name="dst"> <span>Als neuen Container anlegen</span></label>
+<div class="field" style="padding-left: 28px">
+<label for="r-name">Name des neuen Containers</label>
+<input id="r-name" class="inp mono" placeholder="py-tools-restore">
+</div>
+</section>
+
+<section class="card" aria-labelledby="s-h">
+<h2 id="s-h" class="sec"><label for="r-toml">3 · Ziel-Konfiguration (devc.toml)</label></h2>
+<p class="hint" style="margin: -4px 0 10px">Aus dem Archiv übernommen. Vor dem Zurückspielen anpassbar, z. B. Secret-Namen, Ressourcen oder Shared Folder. Fehlende Secrets im Store werden beim Start abgefragt.</p>
+<textarea id="r-toml" class="editor" spellcheck="false">name = "py-tools"
+template = "pydev@1.0.0"
+platform = "lxd"
+addons = ["claude-code", "python", "httpserver"]
+
+[resources]
+cpu = 4
+memory = "8GiB"
+disk = "30GiB"
+
+[data]
+shared = "/srv/dev/py-tools"
+
+[params.python]
+version = "3.12"
+
+[params.httpserver]
+port = 8000
+dir = "/work/out"
+
+[secrets]
+"claude-code.api_key" = "anthropic"</textarea>
+</section>
+</div>
+
+<aside class="card" style="flex: 1 1 320px; min-width: 0" aria-labelledby="p-h">
+<h2 id="p-h" class="sec">Prüfung des Archivs</h2>
+<div class="check"><span aria-hidden="true" style="color: #1F6B42; font-weight: 600">✓</span><span>Prüfsummen stimmen</span></div>
+<div class="check"><span aria-hidden="true" style="color: #1F6B42; font-weight: 600">✓</span><span>devc.toml gültig, Template pydev 1.0.0 vorhanden</span></div>
+<div class="check"><span aria-hidden="true" style="color: #1F6B42; font-weight: 600">✓</span><span>Plattform LXD passt</span></div>
+<div class="check"><span aria-hidden="true" style="color: #1F6B42; font-weight: 600">✓</span><span>enthält Code und Memory</span></div>
+<div style="border-top: 1px solid #E6E9E4; margin-top: 12px; padding-top: 12px">
+<label class="opt"><input type="checkbox"> <span>Mir ist klar, dass <span class="mono">/work</span> und Memory von py-tools überschrieben werden.</span></label>
+<p class="hint" style="margin: 4px 0 0">Tipp: Vorher einen Snapshot machen, dann ist der jetzige Stand nicht verloren.</p>
+</div>
+</aside>
+</div>
+</main>
+</div>
+</body>
+</html>

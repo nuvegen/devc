@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>devc – Container py-tools</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#F4F5F2}
+a{color:#1F5F7A}a:hover{color:#123E51}
+.mono{font-family:'IBM Plex Mono',monospace}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;min-width:44px;padding:0 16px;box-sizing:border-box;border-radius:6px;border:1px solid #BFC8C1;background:#FFFFFF;color:#1B221E;font:500 14px 'IBM Plex Sans',sans-serif;text-decoration:none;cursor:pointer}
+.btn:hover{background:#EEF1ED;color:#1B221E}
+.tile{display:flex;flex-direction:column;gap:6px;padding:18px;background:#FFFFFF;border:1px solid #DDE2DC;border-radius:8px;text-decoration:none;color:#1B221E;min-height:120px;box-sizing:border-box}
+.tile:hover{border-color:#1F5F7A;color:#1B221E}
+.tile .go{margin-top:auto;font-size:13px;color:#1F5F7A;font-weight:500}
+.hint{font-size:12px;color:#56625B;line-height:1.4}
+.top{background:#FFFFFF;border-bottom:1px solid #DDE2DC;padding:0 24px;display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.nav a{color:#3F4A44;text-decoration:none;padding:14px 4px;border-bottom:2px solid transparent;font-weight:500;display:inline-block}
+.nav a.active{color:#1B221E;border-bottom-color:#1F5F7A}
+.crumb{font-size:13px;margin:0}
+.msg{display:flex;gap:10px;align-items:center;padding:12px 16px;border-radius:6px;background:#E8F3EC;border:1px solid #A9CDB6;color:#1A4D30;font-size:14px}
+.qa{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:12px 16px;background:#E9EDEA;border-radius:8px}
+h2.sec{margin:0;font-size:16px;font-weight:600}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; font-family: 'IBM Plex Sans', sans-serif; color: #1B221E; background: #F4F5F2">
+<header class="top">
+<span class="mono" style="font-size: 20px; font-weight: 500; padding: 14px 0">devc</span>
+<nav class="nav" aria-label="Hauptnavigation" style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px">
+<a class="active" href="v2-Dashboard.html">Dashboard</a>
+<a href="v2-Templates.html">Templates</a>
+<a href="v2-Addons.html">Addons</a>
+<a href="v2-Secrets.html">Secret-Store</a>
+</nav>
+</header>
+<main style="max-width: 1200px; margin: 0 auto; padding: 24px 24px 48px; display: flex; flex-direction: column; gap: 20px">
+<p class="crumb"><a href="v2-Dashboard.html">Dashboard</a> <span style="color: #6B766F">/</span> py-tools</p>
+<div style="display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap">
+<div>
+<div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap">
+<h1 class="mono" style="margin: 0; font-size: 28px; font-weight: 500">py-tools</h1>
+<span style="display: inline-flex; align-items: center; gap: 6px; color: #1F6B42; font-weight: 500; font-size: 14px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #2E8B57"></span>läuft</span>
+</div>
+<p style="margin: 4px 0 0; color: #4F5B54; font-size: 14px">LXD · Template <span class="mono">pydev 1.0.0</span> · 4 CPU · 8 GiB · 30 GiB · Code <span class="mono">/srv/dev/py-tools</span></p>
+</div>
+</div>
+
+<section class="qa" aria-labelledby="qa-h">
+<h2 id="qa-h" style="margin: 0 8px 0 0; font-size: 13px; font-weight: 600; color: #4F5B54; text-transform: uppercase; letter-spacing: .05em">Schnellaktionen</h2>
+<button class="btn" type="button">Stoppen</button>
+<button class="btn" type="button">Neu starten</button>
+<button class="btn" type="button">Shell-Befehl kopieren</button>
+</section>
+
+<div class="msg" role="status">Snapshot <span class="mono">auto-20261010-0912</span> erstellt.</div>
+
+
+<section aria-labelledby="fn-h">
+<h2 id="fn-h" class="sec" style="margin-bottom: 12px">Funktionen</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px">
+<a class="tile" href="v2-Terminal.html">
+<span style="font-weight: 600; font-size: 16px">Terminal</span>
+<span style="font-size: 14px">keine Sitzung offen</span>
+<span class="go">Öffnen</span>
+</a>
+<a class="tile" href="v2-Dateien.html">
+<span style="font-weight: 600; font-size: 16px">Dateien</span>
+<span style="font-size: 14px"><span class="mono" style="font-size: 13px">/work</span> · Shared Folder</span>
+<span class="go">Durchsuchen, hoch- und herunterladen</span>
+</a>
+<a class="tile" href="v2-Konfig.html">
+<span style="font-weight: 600; font-size: 16px">Konfiguration</span>
+<span style="font-size: 14px"><span class="mono" style="font-size: 13px">devc.toml</span> · zuletzt angewendet heute 09:12</span>
+<span class="go">Bearbeiten und anwenden</span>
+</a>
+<a class="tile" href="v2-C-Addons.html">
+<span style="font-weight: 600; font-size: 16px">Addons</span>
+<span style="font-size: 14px">4 aktiv · httpserver läuft</span>
+<span class="go">Hilfe und Aktionen</span>
+</a>
+<a class="tile" href="v2-C-Secrets.html">
+<span style="font-weight: 600; font-size: 16px">Secrets</span>
+<span style="font-size: 14px">1 gesetzt · 1 offen</span>
+<span class="go">Verwalten</span>
+</a>
+<a class="tile" href="v2-Snapshots.html">
+<span style="font-weight: 600; font-size: 16px">Snapshots</span>
+<span style="font-size: 14px">2 · letzter heute 09:12</span>
+<span class="go">Liste, erstellen, zurücksetzen</span>
+</a>
+<a class="tile" href="v2-Backups.html">
+<span style="font-weight: 600; font-size: 16px">Backups</span>
+<span style="font-size: 14px">1 · gestern 03:00</span>
+<span class="go">Liste, erstellen, wiederherstellen</span>
+</a>
+<a class="tile" href="v2-Log.html">
+<span style="font-weight: 600; font-size: 16px">Log</span>
+<span style="font-size: 14px">letzter Job: create · erfolgreich</span>
+<span class="go">Jobs ansehen</span>
+</a>
+</div>
+</section>
+<p class="hint" style="margin: 0">Kacheln führen auf die Seite der Funktion. Was ohne Eingabe in einem Schritt geht, steht oben unter Schnellaktionen und meldet das Ergebnis hier.</p>
+</main>
+</div>
+</body>
+</html>

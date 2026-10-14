@@ -1,0 +1,32 @@
+id = "opencode"
+title = "opencode"
+version = "1.1.0"
+description = "opencode CLI und Weboberfläche, Anmeldung über /connect"
+platforms = ["lxd", "apple"]
+requires = ["base"]
+install = ["install.sh"]
+
+[[params]]
+name = "port"
+type = "int"
+default = 4096
+min = 1024
+max = 65535
+description = "Port der Weboberfläche im Container"
+
+[[actions]]
+id = "web"
+label = "Weboberfläche starten"
+run = "opencode web --hostname 0.0.0.0 --port {port}"
+detach = true
+description = "opencode im Browser, Arbeitsverzeichnis /work"
+
+[[actions]]
+id = "web_stop"
+label = "Weboberfläche stoppen"
+stops = "web"
+
+[[links]]
+label = "opencode öffnen"
+port = "{port}"
+when = "web"

@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>devc – Entwicklungs-Container für KI-Agenten</title>
+<!--
+  Präsentation von devc. Eine Folie ist ein <section class="slide">.
+  Bilder liegen in img/ und entstehen mit screenshots.py. build.py macht daraus eine einzige Datei.
+  Bedienung: Pfeiltasten, Leertaste oder scrollen. Drucken ergibt eine Seite je Folie (PDF).
+-->
+<style>
+  :root {
+    --bg: #F4F5F2; --panel: #FFFFFF; --line: #DDE2DC; --text: #1B221E; --muted: #4F5B54;
+    --accent: #1F5F7A; --accent-dark: #174C62; --ok: #1F6B42;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 20px/1.45 var(--sans); }
+  .slide {
+    min-height: 100vh; scroll-snap-align: start; padding: 5vh 6vw; display: grid; gap: 4vw;
+    grid-template-columns: minmax(280px, 1fr) minmax(0, 1.75fr); align-items: center; position: relative;
+  }
+  .slide.wide { grid-template-columns: 1fr; justify-items: start; }
+  .slide.dark { background: var(--accent-dark); color: #fff; }
+  .slide.dark .kicker, .slide.dark .muted { color: #CFE1E8; }
+  h1 { font-size: clamp(44px, 6vw, 88px); line-height: 1.05; margin: 0 0 .3em; letter-spacing: -0.02em; }
+  h2 { font-size: clamp(30px, 3.2vw, 48px); line-height: 1.15; margin: 0 0 .5em; letter-spacing: -0.01em; }
+  p { margin: 0 0 .8em; }
+  .lead { font-size: clamp(22px, 2.1vw, 32px); max-width: 28em; }
+  .kicker { font: 600 14px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1em; }
+  .muted { color: var(--muted); }
+  ul { margin: 0; padding: 0; list-style: none; }
+  li { padding-left: 1.3em; position: relative; margin-bottom: .55em; }
+  li::before { content: ""; position: absolute; left: 0; top: .55em; width: .5em; height: .5em; border-radius: 50%; background: var(--accent); }
+  .dark li::before { background: #8FC3D6; }
+  code { font: .88em var(--mono); background: #E9EDE8; padding: .1em .35em; border-radius: 4px; }
+  .dark code { background: rgba(255, 255, 255, .14); }
+  pre { font: 17px/1.6 var(--mono); background: #10262F; color: #E4EEF1; padding: 22px 26px; border-radius: 10px; margin: 0; overflow-x: auto; }
+  pre .c { color: #8FB0BC; }
+  /* Bildschirmfoto im Rahmen eines Browserfensters */
+  figure { margin: 0; border-radius: 10px; overflow: hidden; background: var(--panel); border: 1px solid var(--line);
+           box-shadow: 0 18px 50px rgba(23, 76, 98, .18), 0 2px 6px rgba(0, 0, 0, .06); }
+  figure::before { content: "● ● ●"; display: block; padding: 7px 14px; font-size: 11px; letter-spacing: 3px; color: #B9C2BC; background: #ECEFEB; border-bottom: 1px solid var(--line); }
+  figure img { display: block; width: 100%; height: auto; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; width: 100%; max-width: 1200px; margin-top: 1em; }
+  .fact { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; }
+  .fact b { display: block; font-size: 22px; margin-bottom: .3em; }
+  .fact span { color: var(--muted); font-size: 18px; }
+  .no { position: absolute; right: 2.2vw; bottom: 2.2vh; font: 13px var(--mono); color: var(--muted); }
+  .dark .no { color: #9DBFCB; }
+  .brand { font: 500 30px var(--mono); letter-spacing: .02em; margin-bottom: 28px; }
+  @media (max-width: 1000px) { .slide { grid-template-columns: 1fr; } .facts { grid-template-columns: 1fr; } body { font-size: 18px; } }
+  @media print {
+    @page { size: 1600px 900px; margin: 0; }
+    html { scroll-snap-type: none; }
+    .slide { height: 900px; min-height: 0; page-break-after: always; break-after: page; }
+    .slide.dark { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<section id="f1" class="slide wide dark">
+  <div>
+    <div class="brand">devc</div>
+    <h1>Entwicklungs-Container<br>für KI-Agenten</h1>
+    <p class="lead">Ein Klick, und Claude Code hat eine eigene, abgeschlossene Arbeitsumgebung. Bedient wird alles im Browser.</p>
+    <p class="muted">Container in LXD · Web-Oberfläche und Kommandozeile · Addons</p>
+  </div>
+  <span class="no">1</span>
+</section>
+
+<section id="f2" class="slide">
+  <div>
+    <div class="kicker">Die Idee</div>
+    <h2>Jedes Projekt bekommt seinen eigenen Container</h2>
+    <ul>
+      <li>Der Agent arbeitet im Container, nicht auf deinem Rechner. Was dort passiert, bleibt dort.</li>
+      <li>Jeder Container ist jederzeit neu aufbaubar: aus einer Vorlage, Addons und einer Textdatei.</li>
+      <li>Code und Home liegen auf eigenen Volumes und bleiben dabei erhalten.</li>
+    </ul>
+  </div>
+  <figure><img src="img/01-dashboard.png" alt="Dashboard von devc mit drei laufenden Containern"></figure>
+  <span class="no">2</span>
+</section>
+
+<section id="f3" class="slide">
+  <div>
+    <div class="kicker">Anlegen</div>
+    <h2>Ein neuer Container mit einem Klick</h2>
+    <ul>
+      <li>Vorlage wählen, Namen eintragen, fertig.</li>
+      <li>Die Vorlage bringt alles mit: Sprache, Claude Code, Git, Werkzeuge.</li>
+      <li>Eigene Vorlagen entstehen aus einem Container, der dir gefällt.</li>
+    </ul>
+  </div>
+  <figure><img src="img/02-neuer-container.png" alt="Seite Neuer Container mit den Vorlagen abapdev, pydev und webdev"></figure>
+  <span class="no">3</span>
+</section>
+
+<section id="f4" class="slide">
+  <div>
+    <div class="kicker">Überblick</div>
+    <h2>Alles zu einem Container auf einer Seite</h2>
+    <ul>
+      <li>Terminal, Dateien, Konfiguration, Secrets, Snapshots und Backups.</li>
+      <li>Addons legen eigene Kacheln dazu, hier »Claude« und »Git«.</li>
+      <li>Starten, Stoppen und Neustarten ohne Umweg.</li>
+    </ul>
+  </div>
+  <figure><img src="img/03-container.png" alt="Dashboard eines Containers mit Kacheln für Terminal, Dateien, Claude und Git"></figure>
+  <span class="no">4</span>
+</section>
+
+<section id="f5" class="slide">
+  <div>
+    <div class="kicker">Claude Code</div>
+    <h2>Mit Claude Code im Browser arbeiten</h2>
+    <ul>
+      <li>Schreiben wie in einem Chat, ohne ein Terminal zu öffnen.</li>
+      <li>Du siehst, was Claude tut, und gibst Befehle und Änderungen frei.</li>
+      <li>Die Unterhaltung läuft weiter, wenn du den Browser schließt.</li>
+    </ul>
+  </div>
+  <figure><img src="img/04-claude.png" alt="Unterhaltung mit Claude Code: Claude lässt Tests laufen, ändert eine Datei und fasst das Ergebnis zusammen"></figure>
+  <span class="no">5</span>
+</section>
+
+<section id="f6" class="slide">
+  <div>
+    <div class="kicker">Terminal</div>
+    <h2>Ein richtiges Terminal, direkt im Browser</h2>
+    <ul>
+      <li>Mehrere Sitzungen als Tabs, als Nutzer <code>dev</code> oder <code>root</code>.</li>
+      <li>Sitzungen bleiben offen, auch nach dem Neuladen der Seite.</li>
+      <li>Wer lieber die Kommandozeile nimmt: <code>devc shell &lt;name&gt;</code>.</li>
+    </ul>
+  </div>
+  <figure><img src="img/05-terminal.png" alt="Web-Terminal im Container mit git status, Tests und git log"></figure>
+  <span class="no">6</span>
+</section>
+
+<section id="f7" class="slide">
+  <div>
+    <div class="kicker">Git</div>
+    <h2>Commit, Push und Pull ohne Kommandozeile</h2>
+    <ul>
+      <li>Findet die Repositories im Container von selbst.</li>
+      <li>Zeigt, was sich geändert hat, auch das, was Claude geändert hat.</li>
+      <li>Ein Commit lässt sich mit einem Klick rückgängig machen.</li>
+    </ul>
+  </div>
+  <figure><img src="img/06-git.png" alt="Kachel Git: ein Repository mit geänderten Dateien und dem Formular für einen Commit"></figure>
+  <span class="no">7</span>
+</section>
+
+<section id="f8" class="slide">
+  <div>
+    <div class="kicker">Addons</div>
+    <h2>Werkzeuge nach Bedarf dazunehmen</h2>
+    <ul>
+      <li>Ein Addon bringt ein Werkzeug in den Container, mit Einstellungen und Knöpfen.</li>
+      <li><code>httpserver</code> zeigt einen Ordner im Browser. <code>webproxy</code> macht eigene Dienste erreichbar.</li>
+      <li>Eigene Addons sind ein Ordner mit ein paar Textdateien.</li>
+    </ul>
+  </div>
+  <figure><img src="img/07-addons.png" alt="Seite Addons mit webproxy und laufendem httpserver"></figure>
+  <span class="no">8</span>
+</section>
+
+<section id="f9" class="slide wide">
+  <div style="width: 100%">
+    <div class="kicker">Unter der Haube</div>
+    <h2>Offen und einfach gebaut</h2>
+    <div class="facts">
+      <div class="fact"><b>Eine Datei</b><span>devc ist ein Python-Programm in einer Datei. Es braucht nur die Standardbibliothek.</span></div>
+      <div class="fact"><b>Offene Formate</b><span>Konfiguration, Vorlagen und Addons sind Textdateien (TOML, Markdown, Shell).</span></div>
+      <div class="fact"><b>Browser und Kommandozeile</b><span>Beide können dasselbe. Alles lässt sich auch in Skripten nutzen.</span></div>
+      <div class="fact"><b>Abgeschottet</b><span>Jedes Projekt läuft in einem eigenen Container in LXD. Secrets liegen in einem eigenen Speicher.</span></div>
+      <div class="fact"><b>Gesichert</b><span>Snapshots und Backups je Container, dazu Versionierung mit Git: Commit, Push und Pull in der Oberfläche.</span></div>
+      <div class="fact"><b>Erweiterbar</b><span>Addons bringen eigene Kacheln mit: Ansichten, Chats, bedienbare Seiten.</span></div>
+    </div>
+  </div>
+  <span class="no">9</span>
+</section>
+
+<section id="f10" class="slide dark">
+  <div>
+    <div class="kicker">Loslegen</div>
+    <h2>In wenigen Minuten startklar</h2>
+    <ul>
+      <li>Eine frische Ubuntu-VM richtet sich mit einer fertigen Datei selbst ein.</li>
+      <li>Danach gibt es devc im Browser und auf der Kommandozeile.</li>
+      <li>Anleitung: <code>README.md</code> und <code>docs/HILFE.md</code> im Repository.</li>
+    </ul>
+  </div>
+  <pre><span class="c"># Vorlagen ansehen</span>
+devc template list
+
+<span class="c"># Container anlegen</span>
+devc create py-tools --template pydev
+
+<span class="c"># Shell im Container</span>
+devc shell py-tools</pre>
+  <span class="no">10</span>
+</section>
+
+<script>
+  // Pfeiltasten und Leertaste blättern um eine Folie.
+  const slides = Array.from(document.querySelectorAll(".slide"));
+  const current = () => slides.reduce((best, slide, index) => Math.abs(slide.getBoundingClientRect().top) < Math.abs(slides[best].getBoundingClientRect().top) ? index : best, 0);
+  document.addEventListener("keydown", (event) => {
+    const step = ["ArrowRight", "ArrowDown", "PageDown", " "].includes(event.key) ? 1 : ["ArrowLeft", "ArrowUp", "PageUp"].includes(event.key) ? -1 : 0;
+    if (!step) return;
+    event.preventDefault();
+    slides[Math.max(0, Math.min(slides.length - 1, current() + step))].scrollIntoView();
+  });
+</script>
+</body>
+</html>

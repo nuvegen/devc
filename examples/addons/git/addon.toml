@@ -1,0 +1,44 @@
+id = "git"
+title = "Git"
+version = "1.1.0"
+description = "Kachel für Git: Repositories finden, Stand ansehen, committen, pushen"
+platforms = ["lxd", "apple"]
+requires = ["base"]
+uninstall = ["uninstall.sh"]
+
+[[params]]
+name = "roots"
+type = "string"
+default = "/work /home/dev"
+max_length = 500
+pattern = "/[A-Za-z0-9._/-]*( +/[A-Za-z0-9._/-]*)*"
+description = "Ordner, in denen nach Repositories gesucht wird, durch Leerzeichen getrennt"
+
+[[params]]
+name = "depth"
+type = "int"
+default = 4
+min = 0
+max = 8
+description = "So viele Ebenen unter diesen Ordnern wird gesucht"
+
+[[params]]
+name = "username"
+type = "string"
+default = ""
+max_length = 200
+pattern = "[^\\s:/@]*"
+description = "Benutzername für Push und Pull über https. Mit einem Token von GitHub oder GitLab kann das Feld leer bleiben"
+
+[[params]]
+name = "token"
+type = "secret"
+description = "Token für Push und Pull über https (GitHub, GitLab); bei anderen Servern das Passwort"
+
+[[tiles]]
+id = "repos"
+title = "Git"
+kind = "panel"
+run = "python3 /opt/devc/addons/git/gitpanel.py --roots {roots} --depth {depth} --user {username}"
+timeout = 120
+description = "Repositories, Änderungen, Commit, Push, Pull"

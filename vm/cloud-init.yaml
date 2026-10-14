@@ -1,0 +1,30 @@
+#cloud-config
+# devc: richtet eine frische Ubuntu-24.04-VM beim ersten Start vollständig ein (vm/README.md).
+# Das ist eine Vorlage. `python3 vm/make-user-data.py` setzt die Werte in @…@ ein und schreibt die fertige Datei.
+# Ablauf beim ersten Start: Dateien ablegen, dann install.sh. Das Protokoll steht in /var/log/cloud-init-output.log.
+
+package_update: true
+
+# Zugang zum Nutzer ubuntu per SSH (für den Tunnel und für die Konsole). Ohne Schlüssel: leere Liste.
+ssh_authorized_keys: @SSH_KEYS@
+
+write_files:
+  - path: /opt/devc/install/install.sh
+    permissions: "0755"
+    encoding: gz+b64
+    content: @INSTALL_SH@
+  - path: /opt/devc/install/devc.pyz
+    permissions: "0644"
+    encoding: gz+b64
+    content: @DEVC_PYZ@
+  - path: /etc/devc/install.conf
+    permissions: "0644"
+    content: |
+      DEVC_BASE_DOMAIN=@BASE_DOMAIN@
+      DEVC_PUBLIC_PORT=@PUBLIC_PORT@
+      DEVC_HTTP_PORT=@HTTP_PORT@
+      DEVC_POOL_DRIVER=@POOL_DRIVER@
+      DEVC_POOL_SIZE=@POOL_SIZE@
+
+runcmd:
+  - [/opt/devc/install/install.sh]

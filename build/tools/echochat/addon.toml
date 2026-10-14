@@ -1,0 +1,19 @@
+id = "echochat"
+title = "Echo-Chat"
+version = "1.0.0"
+description = "Testkachel: Chat ohne KI"
+requires = ["base"]
+uninstall = ["uninstall.sh"]
+
+[[tiles]]
+id = "chat"
+title = "Echo"
+kind = "chat"
+description = "Chat ohne KI, zum Prüfen der Oberfläche"
+run = "python3 /opt/devc/addons/echochat/bridge.py"
+
+[[tiles]]
+id = "doku"
+title = "Beispiel-Link"
+kind = "link"
+url = "https://example.org/{container}"

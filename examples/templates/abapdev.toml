@@ -1,0 +1,51 @@
+# Mitgeliefertes Template: ABAP-Entwicklung gegen das S/4-Entwicklungssystem (Platzhalter in [ECKIGEN KLAMMERN] anpassen)
+id = "abapdev"
+title = "ABAP-Entwicklung"
+version = "1.0.0"
+description = "ABAP mit Claude Code und opencode gegen das S/4-Entwicklungssystem"
+platforms = ["lxd", "apple"]
+addons = ["claude-code", "opencode", "node", "abap", "git"]
+
+[resources]
+cpu = 4
+memory = "8GiB"
+disk = "30GiB"
+
+[data]
+code = "volume"              # oder: shared = "/srv/dev/${name}"
+
+[params.base]
+git_name = "[NAME]"
+git_email = "[E-MAIL]"
+
+[params.abap]
+sap_host = "[S4-HOST]"
+sap_port = 44300
+sap_ssl = true
+sap_client = "100"
+sap_user = "[USER]"
+
+[secrets]                    # nur Namen im geteilten Store, nie Werte
+"claude-code.api_key" = "anthropic"
+"abap.sap_password" = "s4dev"
+"git.key" = "git-deploy"
+
+[git]
+remote = "ssh://git@[GIT-HOST]/${name}.git"
+
+[[files]]
+dest = "/work/.abaplint.json"
+overwrite = false
+content = '''
+{"global": {"files": "/src/**/*.*"}}
+'''
+
+[docs]
+readme = """
+ABAP-Entwicklung gegen das S/4-Entwicklungssystem.
+Vorher die Secrets anthropic, s4dev und git-deploy im Store anlegen.
+"""
+ai = """
+## Projekt
+ABAP-Quellen liegen unter /work/src im abapGit-Layout.
+"""

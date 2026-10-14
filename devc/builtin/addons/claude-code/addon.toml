@@ -1,0 +1,108 @@
+id = "claude-code"
+title = "Claude Code"
+version = "1.9.0"
+description = "Claude Code CLI mit persistentem ~/.claude"
+platforms = ["lxd", "apple"]
+requires = ["base"]
+install = ["install.sh"]
+
+[[params]]
+name = "provider"
+type = "choice"
+options = ["anthropic", "custom"]
+option_labels = ["Anthropic", "Anderer Dienst"]
+default = "anthropic"
+label = "Dienst"
+description = "Mit wem Claude Code spricht"
+
+[[params]]
+name = "oauth_token"
+type = "secret"
+required = false
+label = "Abo-Token"
+group = "Anthropic"
+show_if = "provider=anthropic"
+description = "Aus »claude setup-token«"
+
+[[params]]
+name = "api_key"
+type = "secret"
+required = false
+label = "API-Key"
+group = "Anthropic"
+show_if = "provider=anthropic"
+description = "Nur ohne Abo-Token nötig"
+
+[[params]]
+name = "anthropic_model"
+type = "choice"
+options = ["", "sonnet", "opus", "haiku"]
+option_labels = ["Voreinstellung", "Sonnet", "Opus", "Haiku"]
+default = ""
+label = "Modell"
+group = "Anthropic"
+show_if = "provider=anthropic"
+description = "Für Terminal und Chat"
+
+[[params]]
+name = "base_url"
+type = "string"
+default = ""
+max_length = 300
+pattern = "(https?://[A-Za-z0-9._:/%+~-]+)?"
+label = "Adresse"
+group = "Anderer Dienst"
+show_if = "provider=custom"
+description = "ANTHROPIC_BASE_URL des Dienstes, mit https://"
+
+[[params]]
+name = "auth_token"
+type = "secret"
+required = false
+label = "Schlüssel"
+group = "Anderer Dienst"
+show_if = "provider=custom"
+description = "ANTHROPIC_AUTH_TOKEN des Dienstes"
+
+[[params]]
+name = "model"
+type = "string"
+default = ""
+max_length = 200
+pattern = "([A-Za-z0-9][A-Za-z0-9._:/@+\\[\\]-]*)?"
+label = "Modell"
+group = "Anderer Dienst"
+show_if = "provider=custom"
+description = "Name wie beim Dienst, z. B. ark-code-latest"
+
+[[params]]
+name = "channel"
+type = "choice"
+options = ["stable", "latest"]
+default = "stable"
+label = "Kanal"
+group = "Allgemein"
+description = "Release-Kanal des Installers"
+
+[[params]]
+name = "chat_updates"
+type = "bool"
+default = true
+label = "Zwischenstand"
+group = "Allgemein"
+description = "Claude meldet sich im Chat zwischendurch"
+
+[[params]]
+name = "chat_model"
+type = "string"
+default = ""
+max_length = 80
+hidden = true
+description = "Alt: Modell nur für den Chat. Neu: anthropic_model."
+
+[[tiles]]
+id = "chat"
+title = "Claude"
+kind = "chat"
+description = "Mit Claude Code im Container schreiben"
+run = "python3 /opt/devc/addons/claude-code/bridge.py --model {chat_model} --updates {chat_updates}"

@@ -1,0 +1,24 @@
+id = "info"
+title = "Info"
+version = "1.0.0"
+description = "Kachel mit Daten zum Container: System, Auslastung, Speicherplatz, Prozesse"
+platforms = ["lxd", "apple"]
+requires = ["base"]
+uninstall = ["uninstall.sh"]
+
+[[params]]
+name = "processes"
+type = "int"
+default = 10
+min = 0
+max = 50
+description = "Wie viele Prozesse die Seite zeigt (0 = keine)"
+
+[[tiles]]
+id = "status"
+title = "Info"
+kind = "view"
+description = "System, Auslastung, Speicherplatz, Prozesse"
+run = "bash /opt/devc/addons/info/info.sh {processes}"
+timeout = 10
+refresh = 5

@@ -1,0 +1,44 @@
+id = "httpserver"
+title = "HTTP-Server"
+version = "1.1.0"
+description = "Einfacher HTTP-Server für Dateien aus /work"
+platforms = ["lxd", "apple"]
+requires = ["base", "python"]
+install = ["install.sh"]
+
+[[params]]
+name = "port"
+type = "int"
+default = 8000
+min = 1024
+max = 65535
+description = "Port im Container"
+
+[[params]]
+name = "dir"
+type = "string"
+default = "/work/out"
+description = "Verzeichnis, das ausgeliefert wird"
+
+[[files]]
+src = "files/index.html"
+dest = "/work/out/index.html"
+mode = "0644"
+owner = "dev"
+overwrite = false
+
+[[actions]]
+id = "start"
+label = "Server starten"
+run = "python3 -m http.server {port} --directory {dir}"
+detach = true
+
+[[actions]]
+id = "stop"
+label = "Server stoppen"
+stops = "start"
+
+[[links]]
+label = "Im Browser öffnen"
+port = "{port}"
+when = "start"

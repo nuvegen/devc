@@ -1,0 +1,30 @@
+id = "base"
+title = "Grundsystem"
+version = "1.1.0"
+description = "Nutzer dev, git, curl, Locale und Zeitzone"
+platforms = ["lxd", "apple"]
+install = ["install.sh"]
+
+[[params]]
+name = "timezone"
+type = "string"
+default = "Europe/Berlin"
+description = "Zeitzone im Container"
+
+[[params]]
+name = "git_name"
+type = "string"
+default = ""
+description = "git user.name für den Nutzer dev"
+
+[[params]]
+name = "git_email"
+type = "string"
+default = ""
+description = "git user.email für den Nutzer dev"
+
+[[params]]
+name = "sudo"
+type = "bool"
+default = false
+description = "Nutzer dev darf sudo ohne Passwort"

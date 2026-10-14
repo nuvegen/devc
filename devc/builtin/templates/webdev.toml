@@ -1,0 +1,21 @@
+# Mitgeliefertes Template: Web-Prototypen mit Claude Code und Node.js
+id = "webdev"
+title = "Web-Prototypen"
+version = "1.0.0"
+description = "Web-Prototypen mit Node.js und Claude Code"
+platforms = ["lxd", "apple"]
+addons = ["claude-code", "node", "git"]
+
+[resources]
+cpu = 2
+memory = "4GiB"
+disk = "20GiB"
+
+[data]
+code = "volume"
+
+[params.node]
+version = "22"
+
+[secrets]
+"claude-code.api_key" = "anthropic"

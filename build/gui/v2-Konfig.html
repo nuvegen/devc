@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>devc – py-tools: Konfiguration</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#F4F5F2}
+a{color:#1F5F7A}a:hover{color:#123E51}
+.mono{font-family:'IBM Plex Mono',monospace}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;min-width:44px;padding:0 16px;box-sizing:border-box;border-radius:6px;border:1px solid #BFC8C1;background:#FFFFFF;color:#1B221E;font:500 14px 'IBM Plex Sans',sans-serif;text-decoration:none;cursor:pointer}
+.btn:hover{background:#EEF1ED;color:#1B221E}
+.btn-primary{background:#1F5F7A;border-color:#1F5F7A;color:#FFFFFF}
+.btn-primary:hover{background:#174C62;color:#FFFFFF}
+.btn-danger{border-color:#C9887E;color:#9B2311}
+.card{background:#FFFFFF;border:1px solid #DDE2DC;border-radius:8px;padding:20px}
+.hint{font-size:12px;color:#56625B;line-height:1.4}
+.top{background:#FFFFFF;border-bottom:1px solid #DDE2DC;padding:0 24px;display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.nav a{color:#3F4A44;text-decoration:none;padding:14px 4px;border-bottom:2px solid transparent;font-weight:500;display:inline-block}
+.nav a.active{color:#1B221E;border-bottom-color:#1F5F7A}
+.crumb{font-size:13px;margin:0}
+.editor{width:100%;box-sizing:border-box;min-height:460px;padding:16px;border:1px solid #2F3934;border-radius:6px;background:#1D2420;color:#E6ECE7;font:13px/1.6 'IBM Plex Mono',monospace;resize:vertical}
+h2.sec{margin:0;font-size:16px;font-weight:600}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; font-family: 'IBM Plex Sans', sans-serif; color: #1B221E; background: #F4F5F2">
+<header class="top">
+<span class="mono" style="font-size: 20px; font-weight: 500; padding: 14px 0">devc</span>
+<nav class="nav" aria-label="Hauptnavigation" style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px">
+<a class="active" href="v2-Dashboard.html">Dashboard</a>
+<a href="v2-Templates.html">Templates</a>
+<a href="v2-Addons.html">Addons</a>
+<a href="v2-Secrets.html">Secret-Store</a>
+</nav>
+</header>
+<main style="max-width: 1200px; margin: 0 auto; padding: 24px 24px 48px; display: flex; flex-direction: column; gap: 16px">
+<p class="crumb"><a href="v2-Dashboard.html">Dashboard</a> <span style="color: #6B766F">/</span> <a href="v2-Container.html">py-tools</a> <span style="color: #6B766F">/</span> Konfiguration</p>
+<div style="display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap">
+<div>
+<h1 style="margin: 0; font-size: 28px; font-weight: 600">Konfiguration</h1>
+<p style="margin: 4px 0 0; color: #4F5B54; font-size: 14px"><span class="mono">devc.toml</span> von py-tools · aus <span class="mono">pydev@1.0.0</span></p>
+</div>
+<div style="margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap">
+<button class="btn" type="button">Verwerfen</button>
+<button class="btn btn-primary" type="button">Anwenden</button>
+</div>
+</div>
+
+<section class="card" aria-labelledby="ed-h">
+<h2 id="ed-h" class="sec" style="margin-bottom: 10px"><label for="k-toml">devc.toml</label></h2>
+<textarea id="k-toml" class="editor" spellcheck="false">name = "py-tools"
+template = "pydev@1.0.0"
+platform = "lxd"
+addons = ["claude-code", "python", "httpserver"]
+
+[resources]
+cpu = 4
+memory = "8GiB"
+disk = "30GiB"
+
+[data]
+shared = "/srv/dev/py-tools"
+
+[params.python]
+version = "3.12"
+
+[params.httpserver]
+port = 8000
+dir = "/work/out"
+
+[secrets]
+"claude-code.api_key" = "anthropic"</textarea>
+<p class="hint" style="margin: 10px 0 0">Anwenden prüft die Datei und setzt Änderungen um: Addons installieren, Parameter neu anwenden, Ressourcen setzen, Agent-Doku neu erzeugen. Der Fortschritt steht im <a href="v2-Log.html">Log</a>.</p>
+</section>
+
+<section class="card" style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap; border-color: #E3B8B0" aria-labelledby="dz-h">
+<h2 id="dz-h" class="sec" style="color: #9B2311">Container löschen</h2>
+<label style="display: flex; gap: 10px; align-items: center; min-height: 44px; font-size: 14px"><input type="checkbox" checked style="width: 18px; height: 18px"> Datenbereich behalten</label>
+<button class="btn btn-danger" type="button" style="margin-left: auto">py-tools löschen</button>
+</section>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+id = "python"
+title = "Python"
+version = "1.0.0"
+description = "Python 3 mit venv, pip und ruff"
+platforms = ["lxd", "apple"]
+requires = ["base"]
+install = ["install.sh"]
+
+[[params]]
+name = "version"
+type = "choice"
+options = ["3.12", "3.13"]
+default = "3.12"
+description = "3.12 ist die Systemversion von Ubuntu 24.04, andere kommen aus dem deadsnakes-PPA"
+
+[[actions]]
+id = "venv"
+label = "venv anlegen"
+run = "python{version} -m venv {workdir}/.venv"
+description = "Legt /work/.venv an oder lässt ein vorhandenes stehen"
+
+[[actions]]
+id = "deps"
+label = "Abhängigkeiten installieren"
+run = "{workdir}/.venv/bin/pip install -e {workdir}"
+description = "Installiert das Projekt aus /work editierbar in die venv"

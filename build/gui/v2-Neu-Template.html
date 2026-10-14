@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>devc – Neuer Container: Template wählen</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#F4F5F2}
+a{color:#1F5F7A}a:hover{color:#123E51}
+.mono{font-family:'IBM Plex Mono',monospace}
+.chip{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:18px;padding:2px 8px;border:1px solid #C9D0CA;border-radius:4px;background:#FFFFFF;color:#2E3A33}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;min-width:44px;padding:0 16px;box-sizing:border-box;border-radius:6px;border:1px solid #BFC8C1;background:#FFFFFF;color:#1B221E;font:500 14px 'IBM Plex Sans',sans-serif;text-decoration:none;cursor:pointer}
+.btn:hover{background:#EEF1ED;color:#1B221E}
+.btn-primary{background:#1F5F7A;border-color:#1F5F7A;color:#FFFFFF}
+.btn-primary:hover{background:#174C62;color:#FFFFFF}
+.tile{display:flex;flex-direction:column;gap:8px;padding:20px;background:#FFFFFF;border:1px solid #DDE2DC;border-radius:8px;text-decoration:none;color:#1B221E;box-sizing:border-box}
+.tile:hover{border-color:#1F5F7A;color:#1B221E}
+.hint{font-size:12px;color:#56625B;line-height:1.4}
+.top{background:#FFFFFF;border-bottom:1px solid #DDE2DC;padding:0 24px;display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.nav a{color:#3F4A44;text-decoration:none;padding:14px 4px;border-bottom:2px solid transparent;font-weight:500;display:inline-block}
+.nav a.active{color:#1B221E;border-bottom-color:#1F5F7A}
+.crumb{font-size:13px;margin:0}
+.steps{display:flex;gap:8px;flex-wrap:wrap;font-size:13px}
+.steps span{padding:6px 12px;border-radius:999px;border:1px solid #CBD2CC;background:#FFFFFF;color:#4F5B54}
+.steps span.on{background:#1F5F7A;border-color:#1F5F7A;color:#FFFFFF;font-weight:500}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; font-family: 'IBM Plex Sans', sans-serif; color: #1B221E; background: #F4F5F2">
+<header class="top">
+<span class="mono" style="font-size: 20px; font-weight: 500; padding: 14px 0">devc</span>
+<nav class="nav" aria-label="Hauptnavigation" style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px">
+<a class="active" href="v2-Dashboard.html">Dashboard</a>
+<a href="v2-Templates.html">Templates</a>
+<a href="v2-Addons.html">Addons</a>
+<a href="v2-Secrets.html">Secret-Store</a>
+</nav>
+</header>
+<main style="max-width: 1200px; margin: 0 auto; padding: 24px 24px 48px; display: flex; flex-direction: column; gap: 20px">
+<p class="crumb"><a href="v2-Dashboard.html">Dashboard</a> <span style="color: #6B766F">/</span> Neuer Container</p>
+<div style="display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap">
+<div>
+<h1 style="margin: 0 0 10px; font-size: 28px; font-weight: 600">Neuer Container</h1>
+<div class="steps" aria-label="Schritte"><span class="on">1 · Template wählen</span><span>2 · Instanz bearbeiten</span></div>
+</div>
+<a class="btn" href="v2-Dashboard.html" style="margin-left: auto">Abbrechen</a>
+</div>
+<p style="margin: 0; font-size: 15px; color: #2E3A33">Wähle einen Ausgangspunkt. Im nächsten Schritt passt du die Konfiguration für diese Instanz an; das Template bleibt unverändert.</p>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px">
+<a class="tile" href="v2-Neu-Konfig.html">
+<span style="display: flex; justify-content: space-between; gap: 8px; align-items: baseline"><span class="mono" style="font-weight: 500; font-size: 17px">abapdev</span><span class="hint">eigen · 1.0.0</span></span>
+<span style="font-size: 14px">ABAP mit Claude Code und opencode gegen das S/4-Entwicklungssystem</span>
+<span style="display: flex; gap: 4px; flex-wrap: wrap"><span class="chip">claude-code</span><span class="chip">opencode</span><span class="chip">abap</span><span class="chip">node</span></span>
+<span class="hint" style="color: #8A4B08">1 Secret fehlt im Store, wird beim Anlegen abgefragt</span>
+</a>
+<a class="tile" href="v2-Neu-Konfig.html">
+<span style="display: flex; justify-content: space-between; gap: 8px; align-items: baseline"><span class="mono" style="font-weight: 500; font-size: 17px">pydev</span><span class="hint">mitgeliefert · 1.0.0</span></span>
+<span style="font-size: 14px">Python-Tools und Skripte</span>
+<span style="display: flex; gap: 4px; flex-wrap: wrap"><span class="chip">claude-code</span><span class="chip">python</span></span>
+<span class="hint">alle Secrets vorhanden</span>
+</a>
+<a class="tile" href="v2-Neu-Konfig.html">
+<span style="display: flex; justify-content: space-between; gap: 8px; align-items: baseline"><span class="mono" style="font-weight: 500; font-size: 17px">webdev</span><span class="hint">mitgeliefert · 1.0.0</span></span>
+<span style="font-size: 14px">Web-Prototypen</span>
+<span style="display: flex; gap: 4px; flex-wrap: wrap"><span class="chip">claude-code</span><span class="chip">node</span></span>
+<span class="hint">alle Secrets vorhanden</span>
+</a>
+<a class="tile" href="v2-Neu-Konfig.html" style="border-style: dashed">
+<span style="font-weight: 600; font-size: 17px">Ohne Template</span>
+<span style="font-size: 14px">Leere devc.toml mit Standardwerten aus der Config</span>
+<span class="hint">nur Addon base vorbelegt</span>
+</a>
+</div>
+<p class="hint" style="margin: 0">Templates verwaltest du unter <a href="v2-Templates.html">Templates</a>.</p>
+</main>
+</div>
+</body>
+</html>
